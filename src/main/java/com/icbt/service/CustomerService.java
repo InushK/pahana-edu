@@ -3,18 +3,19 @@ package com.icbt.service;
 import com.icbt.dao.CustomerDAO;
 import com.icbt.model.Customer;
 
+import java.util.List;
+
 public class CustomerService {
+    private CustomerDAO customerDAO = new CustomerDAO();
 
-    private final CustomerDAO customerDAO;
-
-    public CustomerService() {
-        this.customerDAO = new CustomerDAO();
-    }
-
-    public boolean addCustomer(Customer customer) {
+    public boolean registerCustomer(Customer customer) {
         return customerDAO.addCustomer(customer);
     }
 
-    // You can add more methods later like:
-    // getCustomerById(), updateCustomer(), deleteCustomer(), getAllCustomers()
+    public boolean updateCustomer(Customer customer) {
+        return customerDAO.updateCustomer(customer);
+    }
+    public List<Customer> getAllCustomers() {
+        return customerDAO.getAllCustomers();
+    }
 }
