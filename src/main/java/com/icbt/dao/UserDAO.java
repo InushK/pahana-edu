@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class UserDAO {
     public User getUser(String username, String password) {
-        String sql = "select * from users where name=? and password=?";
+        String sql = "select * from users where username=? and password=?";
         try (Connection con = DBConnection.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)){
             stmt.setString(1,username);
@@ -19,7 +19,7 @@ public class UserDAO {
                 if (rs.next()){
                     return new User(
                             rs.getInt("id"),
-                            rs.getString("name"),
+                            rs.getString("username"),
                             rs.getString("password")
                     );
                 }
