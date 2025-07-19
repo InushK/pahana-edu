@@ -13,7 +13,7 @@ import java.util.List;
 
 @WebServlet("/CustomerServlet")
 public class CustomerServlet extends HttpServlet {
-    private CustomerService customerService = new CustomerService();
+    private final CustomerService customerService = new CustomerService();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +47,6 @@ public class CustomerServlet extends HttpServlet {
         }
 
         if (success) {
-            // ✅ Redirect to customer list (doGet will handle loading and forwarding)
             response.sendRedirect("CustomerServlet");
         } else {
             response.sendRedirect("error.jsp");
@@ -58,6 +57,26 @@ public class CustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String mode = request.getParameter("mode");
+
+        if ("delete".equals(mode)) {
+            String accNumStr = request.getParameter("accountNumber");
+
+            try {
+                int accountNumber = Integer.parseInt(accNumStr);
+                customerService.deleteCustomer(accountNumber);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                response.sendRedirect("error.jsp");
+                return;
+            }
+
+            // After deletion, redirect back to the customer list
+            response.sendRedirect("CustomerServlet");
+            return;
+        }
+
+        // Default behavior: load customer list
         List<Customer> customerList = customerService.getAllCustomers();
         request.setAttribute("customers", customerList);
         request.getRequestDispatcher("show-customer.jsp").forward(request, response);

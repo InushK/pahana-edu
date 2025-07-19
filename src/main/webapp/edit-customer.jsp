@@ -1,13 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 7/19/2025
-  Time: 7:50 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-  // Simulated values (should be passed from a servlet in real use)
   String accountNumber = request.getParameter("accountNumber");
   String name = request.getParameter("name");
   String address = request.getParameter("address");
@@ -57,20 +49,38 @@
       box-sizing: border-box;
     }
 
-    input[type="submit"] {
-      width: 100%;
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
       padding: 12px;
-      background-color: #007bff;
-      color: #ffffff;
-      border: none;
-      border-radius: 6px;
       font-size: 16px;
+      border-radius: 6px;
+      border: none;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
 
-    input[type="submit"]:hover {
+    .btn-update {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-update:hover {
       background-color: #0056b3;
+    }
+
+    .btn-delete {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-delete:hover {
+      background-color: #b52a37;
     }
 
     .back-link {
@@ -102,10 +112,16 @@
     <label for="telephone">Telephone:</label>
     <input type="text" id="telephone" name="telephone" value="<%= telephone != null ? telephone : "" %>">
 
-    <input type="submit" value="Update Customer">
+    <div class="btn-group">
+      <button type="submit" class="btn btn-update">Update</button>
+      <button type="submit" name="delete" value="true" class="btn btn-delete"
+              onclick="return confirm('Are you sure you want to delete this customer?');">
+        Delete
+      </button>
+    </div>
   </form>
 
-  <a href="show-customer.jsp" class="back-link">← Back to Customer List</a>
+  <a href="CustomerServlet" class="back-link">← Back to Customer List</a>
 </div>
 
 </body>
