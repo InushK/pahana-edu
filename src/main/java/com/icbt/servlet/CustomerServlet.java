@@ -2,7 +2,6 @@ package com.icbt.servlet;
 
 import com.icbt.model.Customer;
 import com.icbt.service.CustomerService;
-import com.icbt.util.DBConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,18 +9,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/CustomerServlet")
-
-
 public class CustomerServlet extends HttpServlet {
     private CustomerService customerService = new CustomerService();
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -53,12 +47,14 @@ public class CustomerServlet extends HttpServlet {
         }
 
         if (success) {
-            response.sendRedirect("main-menu.jsp");
+            // ✅ Redirect to customer list (doGet will handle loading and forwarding)
+            response.sendRedirect("CustomerServlet");
         } else {
             response.sendRedirect("error.jsp");
         }
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
