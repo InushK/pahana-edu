@@ -26,7 +26,7 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(String name) {
         this.username = username;
     }
 
