@@ -1,5 +1,6 @@
 package com.icbt.utill;
 
+import com.icbt.util.DBConnection;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
