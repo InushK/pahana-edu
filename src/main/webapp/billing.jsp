@@ -1,118 +1,131 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.*, com.icbt.model.Bill" %>
+<%
+    List<Bill> bills = (List<Bill>) request.getAttribute("bills");
+%>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create Bill</title>
+    <title>All Bills</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            padding: 30px;
+            background-color: #E3E3E3;
+            padding: 40px;
         }
+
         h2 {
             text-align: center;
+            color: #333;
         }
-        .form-container {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            max-width: 800px;
-            margin: auto;
-            box-shadow: 0 0 10px #ccc;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        table, th, td {
-            border: 1px solid #999;
-        }
-        th, td {
-            padding: 8px;
-            text-align: center;
-        }
-        input[type="text"], input[type="number"] {
-            width: 95%;
-            padding: 5px;
-        }
+
         .btn {
-            padding: 10px 15px;
-            margin-top: 15px;
-            background-color: #2e7d32;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
+            display: inline-block;
+            padding: 8px 14px;
+            background-color: #666;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 20px;
         }
+
         .btn:hover {
-            background-color: #1b5e20;
+            background-color: #555;
+        }
+
+        .btn-danger {
+            background-color: #a94442;
+        }
+
+        .btn-danger:hover {
+            background-color: #843534;
+        }
+
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #999;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .actions a {
+            margin-right: 8px;
+            text-decoration: none;
+        }
+
+        .actions form {
+            display: inline;
+        }
+
+        .top-bar {
+            text-align: center;
+            margin-bottom: 20px;
         }
     </style>
-    <script>
-        function addRow() {
-            let table = document.getElementById("itemTable");
-            let row = table.insertRow(-1);
-
-            row.innerHTML = `
-                <td><input type="number" name="itemId" required></td>
-                <td><input type="number" name="quantity" min="1" required></td>
-                <td><input type="number" step="0.01" name="price" min="0" required></td>
-                <td><button type="button" onclick="removeRow(this)">Remove</button></td>
-            `;
-        }
-
-        function removeRow(button) {
-            let row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-        }
-
-        function prepareFormBeforeSubmit() {
-            // Convert item inputs to array fields
-            const itemIds = document.getElementsByName("itemId");
-            const quantities = document.getElementsByName("quantity");
-            const prices = document.getElementsByName("price");
-
-            for (let i = 0; i < itemIds.length; i++) {
-                itemIds[i].name = "itemId[]";
-                quantities[i].name = "quantity[]";
-                prices[i].name = "price[]";
-            }
-
-            return true;
-        }
-    </script>
 </head>
 <body>
-<h2>Create New Bill</h2>
-<div class="form-container">
-    <form action="BillServlet" method="post" onsubmit="return prepareFormBeforeSubmit()">
-        <label for="accountNumber"><strong>Customer Account Number:</strong></label><br>
-        <input type="number" id="accountNumber" name="accountNumber" required><br><br>
 
-        <table id="itemTable">
-            <thead>
-            <tr>
-                <th>Item ID</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><input type="number" name="itemId" required></td>
-                <td><input type="number" name="quantity" min="1" required></td>
-                <td><input type="number" step="0.01" name="price" min="0" required></td>
-                <td><button type="button" onclick="removeRow(this)">Remove</button></td>
-            </tr>
-            </tbody>
-        </table>
+<h2>Bill List</h2>
 
-        <button type="button" class="btn" onclick="addRow()">Add Another Item</button><br>
-        <button type="submit" class="btn">Generate Bill</button>
-    </form>
+<div class="top-bar">
+    <a class="btn" href="BillServlet?action=new">+ Create New Bill</a>
 </div>
+
+<table>
+    <tr>
+        <th>Bill ID</th>
+        <th>Account Number</th>
+        <th>Total Amount</th>
+        <th>Bill Date</th>
+        <th>Actions</th>
+    </tr>
+
+    <% if (bills != null && !bills.isEmpty()) {
+        for (Bill bill : bills) {
+    %>
+    <tr>
+        <td><%= bill.getBillId() %></td>
+        <td><%= bill.getAccountNumber() %></td>
+        <td><%= bill.getTotalAmount() %></td>
+        <td><%= bill.getBillDate() %></td>
+        <td class="actions">
+            <a class="btn"
+               href="BillServlet?action=edit&billId=<%= bill.getBillId() %>&accountNumber=<%= bill.getAccountNumber() %>&totalAmount=<%= bill.getTotalAmount() %>&billDate=<%= bill.getBillDate() %>">
+                Edit
+            </a>
+            <a class="btn btn-danger"
+               href="BillServlet?action=delete&id=<%= bill.getBillId() %>"
+               onclick="return confirm('Are you sure you want to delete this bill?');">
+                Delete
+            </a>
+        </td>
+    </tr>
+    <%
+        }
+    } else {
+    %>
+    <tr>
+        <td colspan="5" style="text-align:center;">No bills available.</td>
+    </tr>
+    <% } %>
+</table>
+
 </body>
 </html>
-

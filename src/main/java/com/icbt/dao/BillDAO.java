@@ -1,43 +1,43 @@
 package com.icbt.dao;
 
-import com.icbt.model.BillItem;
+import com.icbt.model.Bill;
 import com.icbt.util.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BillItemDAO {
+public class BillDAO {
 
-    // Add multiple bill items
-    public void addBillItems(List<BillItem> items) {
-        String sql = "INSERT INTO bill_items (bill_id, item_id, quantity, price) VALUES (?, ?, ?, ?)";
+    // Add a new bill and return generated ID
+    public int addBill(Bill bill) {
+        String sql = "INSERT INTO bills (account_number, total_amount) VALUES (?, ?)";
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            for (BillItem item : items) {
-                stmt.setInt(1, item.getBillId());
-                stmt.setInt(2, item.getItemId());
-                stmt.setInt(3, item.getQuantity());
-                stmt.setDouble(4, item.getPrice());
-                stmt.addBatch();
+            stmt.setInt(1, bill.getAccountNumber());
+            stmt.setDouble(2, bill.getTotalAmount());
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1); // Return generated bill ID
             }
-            stmt.executeBatch();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return -1; // Failure
     }
 
-    // Update a single bill item
-    public boolean updateBillItem(BillItem item) {
-        String sql = "UPDATE bill_items SET item_id = ?, quantity = ?, price = ? WHERE id = ?";
+    // Update an existing bill
+    public boolean updateBill(Bill bill) {
+        String sql = "UPDATE bills SET account_number = ?, total_amount = ? WHERE bill_id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, item.getItemId());
-            stmt.setInt(2, item.getQuantity());
-            stmt.setDouble(3, item.getPrice());
-            stmt.setInt(4, item.getId());
+            stmt.setInt(1, bill.getAccountNumber());
+            stmt.setDouble(2, bill.getTotalAmount());
+            stmt.setInt(3, bill.getBillId());
 
             return stmt.executeUpdate() > 0;
         } catch (Exception e) {
@@ -46,13 +46,13 @@ public class BillItemDAO {
         return false;
     }
 
-    // Delete a bill item by its ID
-    public boolean deleteBillItem(int billItemId) {
-        String sql = "DELETE FROM bill_items WHERE id = ?";
+    // Delete a bill by ID
+    public boolean deleteBill(int billId) {
+        String sql = "DELETE FROM bills WHERE bill_id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, billItemId);
+            stmt.setInt(1, billId);
             return stmt.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,52 +60,48 @@ public class BillItemDAO {
         return false;
     }
 
-    // Get all bill items
-    public List<BillItem> getAllBillItems() {
-        List<BillItem> items = new ArrayList<>();
-        String sql = "SELECT * FROM bill_items";
+    // Retrieve all bills
+    public List<Bill> getAllBills() {
+        List<Bill> bills = new ArrayList<>();
+        String sql = "SELECT * FROM bills";
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                BillItem item = new BillItem();
-                item.setId(rs.getInt("id"));
-                item.setBillId(rs.getInt("bill_id"));
-                item.setItemId(rs.getInt("item_id"));
-                item.setQuantity(rs.getInt("quantity"));
-                item.setPrice(rs.getDouble("price"));
-                items.add(item);
+                Bill bill = new Bill();
+                bill.setBillId(rs.getInt("id"));
+                bill.setAccountNumber(rs.getInt("account_number"));
+                bill.setTotalAmount(rs.getDouble("total_amount"));
+                bills.add(bill);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return items;
+
+        return bills;
     }
 
-    // **This is the missing method you need:**
-    // Get bill items by bill ID
-    public List<BillItem> getBillItemsByBillId(int billId) {
-        List<BillItem> items = new ArrayList<>();
-        String sql = "SELECT * FROM bill_items WHERE bill_id = ?";
+    // Get a bill by its ID
+    public Bill getBillById(int billId) {
+        String sql = "SELECT * FROM bills WHERE bill_id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, billId);
             ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                BillItem item = new BillItem();
-                item.setId(rs.getInt("id"));
-                item.setBillId(rs.getInt("bill_id"));
-                item.setItemId(rs.getInt("item_id"));
-                item.setQuantity(rs.getInt("quantity"));
-                item.setPrice(rs.getDouble("price"));
-                items.add(item);
+            if (rs.next()) {
+                Bill bill = new Bill();
+                bill.setBillId(rs.getInt("bill_id"));
+                bill.setAccountNumber(rs.getInt("account_number"));
+                bill.setTotalAmount(rs.getDouble("total_amount"));
+                return bill;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return items;
+        return null;
     }
 }

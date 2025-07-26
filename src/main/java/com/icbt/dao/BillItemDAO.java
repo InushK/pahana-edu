@@ -32,6 +32,34 @@ public class BillItemDAO {
         }
     }
 
+    // Add this method to your BillItemDAO class
+    public List<BillItem> getBillItemsByBillId(int billId) {
+        List<BillItem> billItems = new ArrayList<>();
+        String sql = "SELECT * FROM bill_items WHERE bill_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, billId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    BillItem item = new BillItem();
+                    item.setBillItemId(rs.getInt("bill_item_id"));
+                    item.setBillId(rs.getInt("bill_id"));
+                    item.setItemId(rs.getInt("item_id"));
+                    item.setQuantity(rs.getInt("quantity"));
+                    item.setPrice(rs.getDouble("price"));
+                    billItems.add(item);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return billItems;
+    }
+
+
     // Update a single bill item
     public boolean updateBillItem(BillItem item) {
         String sql = "UPDATE bill_items SET bill_id = ?, item_id = ?, quantity = ?, price = ? WHERE bill_item_id = ?";

@@ -2,8 +2,12 @@ package com.icbt.servlet;
 
 import com.icbt.model.Bill;
 import com.icbt.model.BillItem;
+import com.icbt.model.Customer;
+import com.icbt.model.Item;
 import com.icbt.service.BillItemService;
 import com.icbt.service.BillService;
+import com.icbt.service.CustomerService;
+import com.icbt.service.ItemService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -17,12 +21,45 @@ import java.util.List;
 public class BillServlet extends HttpServlet {
     private final BillService billService = new BillService();
     private final BillItemService billItemService = new BillItemService();
+    private final CustomerService customerService = new CustomerService();
+    private final ItemService itemService = new ItemService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Redirect GET requests to billing.jsp
-        response.sendRedirect("billing.jsp");
+        String action=request.getParameter("action");
+        if (action!= null){
+            if(action.equals("new")){
+                List<Item> items = itemService.getAllItems();
+                List<Customer> customers = customerService.getAllCustomers();
+                request.setAttribute("items" , items);
+                request.setAttribute("customers" , customers);
+                request.getRequestDispatcher("create-bill.jsp").forward(request,response);
+
+            } else if (action.equals("edit")) {
+                String idParam= request.getParameter("id");
+                if (idParam!=null) {
+                    int id = Integer.parseInt(idParam);
+                    Bill bill = billService.getBillById(id);
+                    request.setAttribute("bill", bill);
+                    request.getRequestDispatcher("edit-bill.jsp").forward(request, response);
+                }
+
+                } else if (action.equals("delete")) {
+                String idParam= request.getParameter("id");
+                if (idParam!=null){
+                    int id=Integer.parseInt(idParam);
+                    billService.deleteBill(id);
+                    response.sendRedirect("BillServlet");
+
+
+                }            }
+        } else{
+            List<Bill> bills = billService.getAllBills();
+            request.setAttribute("bills" , bills);
+            request.getRequestDispatcher("billing.jsp").forward(request,response);
+
+        }
     }
 
     @Override
