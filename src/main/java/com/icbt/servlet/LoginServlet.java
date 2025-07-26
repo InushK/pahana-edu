@@ -1,4 +1,4 @@
-package com.icbt.controller;
+package com.icbt.servlet;
 
 import com.icbt.model.User;
 import com.icbt.service.UserService;
