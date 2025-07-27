@@ -1,12 +1,33 @@
 package com.icbt.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Bill {
     private int billId;
     private int accountNumber;
     private double totalAmount;
     private Date billDate;
+    private List<BillItem> billItems;
+
+    public Bill(int billId, int accountNumber, double totalAmount, Date billDate, List<BillItem> billItems) {
+        this.billId = billId;
+        this.accountNumber = accountNumber;
+        this.totalAmount = totalAmount;
+        this.billDate = billDate;
+        this.billItems = billItems;
+    }
+
+    public Bill(){}
+
+
+    public List<BillItem> getBillItems() {
+        return billItems;
+    }
+
+    public void setBillItems(List<BillItem> billItems) {
+        this.billItems = billItems;
+    }
 
     // Getters and Setters
     public int getBillId() {
@@ -15,6 +36,8 @@ public class Bill {
     public void setBillId(int billId) {
         this.billId = billId;
     }
+
+
 
     public int getAccountNumber() {
         return accountNumber;

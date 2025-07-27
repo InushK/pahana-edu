@@ -107,7 +107,7 @@
         <td><%= bill.getBillDate() %></td>
         <td class="actions">
             <a class="btn"
-               href="BillServlet?action=edit&billId=<%= bill.getBillId() %>&accountNumber=<%= bill.getAccountNumber() %>&totalAmount=<%= bill.getTotalAmount() %>&billDate=<%= bill.getBillDate() %>">
+               href="BillServlet?action=edit&id=<%= bill.getBillId() %>&accountNumber=<%= bill.getAccountNumber() %>&totalAmount=<%= bill.getTotalAmount() %>&billDate=<%= bill.getBillDate() %>">
                 Edit
             </a>
             <a class="btn btn-danger"

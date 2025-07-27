@@ -44,7 +44,7 @@ public class BillItemDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     BillItem item = new BillItem();
-                    item.setBillItemId(rs.getInt("bill_item_id"));
+                    item.setBillItemId(rs.getInt("id"));
                     item.setBillId(rs.getInt("bill_id"));
                     item.setItemId(rs.getInt("item_id"));
                     item.setQuantity(rs.getInt("quantity"));
@@ -104,7 +104,7 @@ public class BillItemDAO {
 
             while (rs.next()) {
                 BillItem item = new BillItem();
-                item.setBillItemId(rs.getInt("bill_item_id"));
+                item.setBillItemId(rs.getInt("id"));
                 item.setBillId(rs.getInt("bill_id"));
                 item.setItemId(rs.getInt("item_id"));
                 item.setQuantity(rs.getInt("quantity"));
