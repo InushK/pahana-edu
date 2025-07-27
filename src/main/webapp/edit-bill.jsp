@@ -80,8 +80,8 @@
     <input type="hidden" name="formAction" value="update" />
     <input type="hidden" name="billId" value="<%= bill.getBillId() %>" />
 
-    <label for="accountNumber">Account Number:</label>
-    <select name="accountNumber" required>
+    <label for="customer_id">Account Number:</label>
+    <select name="customer_id" required>
         <% for (Customer customer : customers) { %>
         <option value="<%= customer.getAccountNumber() %>"
                 <%= customer.getAccountNumber() == bill.getAccountNumber() ? "selected" : "" %>>
@@ -102,7 +102,7 @@
         <% for (BillItem billItem : billItems) { %>
         <tr>
             <td>
-                <select name="itemId">
+                <select name="itemId[]">
                     <% for (Item item : items) { %>
                     <option value="<%= item.getItem_id() %>" <%= item.getItem_id() == billItem.getItemId() ? "selected" : "" %>>
                         <%= item.getItem_name() %>
@@ -111,10 +111,10 @@
                 </select>
             </td>
             <td>
-                <input type="number" name="quantity" value="<%= billItem.getQuantity() %>" min="1" required />
+                <input type="number" name="quantity[]" value="<%= billItem.getQuantity() %>" min="1" required />
             </td>
             <td>
-                <input type="text" name="price" value="<%= billItem.getPrice() %>" required />
+                <input type="text" name="price[]" value="<%= billItem.getPrice() %>" required />
             </td>
         </tr>
         <% } %>

@@ -92,7 +92,7 @@ System.out.println(request.getParameter("customer_id"));
 
 
             if (itemIds == null || quantities == null || prices == null
-                    || itemIds.length != quantities.length || itemIds.length != prices.length) {
+                    || itemIds.length != quantities.length || itemIds.length != prices. length) {
                 response.sendRedirect("error.jsp");
                 return;
             }
