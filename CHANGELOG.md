@@ -75,7 +75,6 @@ This marks the first stable version of the **Pahan Edu Web** application. Develo
 ### 🎨 UI & UX
 
 - Clear button styling, form layout, and validation feedback
----
 
 ### 📁 Project Structure
 
