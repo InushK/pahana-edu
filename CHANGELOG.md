@@ -61,39 +61,33 @@ This marks the first stable version of the **Pahan Edu Web** application. Develo
     - `BillItemServiceTest`
     - `DBConnectionTest`
 
-- Tests run on real DB environment with setup/teardown for isolation
+- Tests run on real DB environment with test/ for isolation
 
 ---
 
 ### 🛡️ Security
 
-- Session validation for protected routes
-- Sensitive JSPs placed under `WEB-INF/views`
+- Sensitive JSPs placed under `webapp`
 - No direct JSP access allowed without authentication
 
 ---
 
 ### 🎨 UI & UX
 
-- Consistent modern dark mode across all modules
 - Clear button styling, form layout, and validation feedback
-- Font Awesome icons for navigation and actions
-
 ---
 
 ### 📁 Project Structure
 
 - Follows clean layered Maven design:  
-  `model`, `dao`, `service`, `controller`, `webapp/views`
+  `model`, `dao`, `service`, `servlet`, `webapp/`
 
 - SQL scripts under `/sql/`
-- Static assets like CSS and JS under `/assets/`
-
 ---
 
 ### 🔀 Release Summary
 
-- All features merged from `test/junit` into `main`
+- All features merged from `test/junit` into `dev`
 - Manual QA performed on local Tomcat server
 - Version tag: `v1.0.0` applied after passing all test cases
 
