@@ -62,8 +62,8 @@
   <a href="ItemServlet">Manage Items</a>
   <a href="DisplayAccount.jsp">Display Account Details</a>
   <a href="BillServlet">Calculate & Print Bill</a>
-  <a href="Help.jsp">Help</a>
-  <a href="LogoutServlet">Logout</a>
+  <a href="help.jsp">Help</a>
+  <a href="LogoutServlet" onclick="return confirm('Are you sure you want to logout?')">Logout</a>
 </div>
 
 </body>
