@@ -1,4 +1,4 @@
-package com.icbt.utill;
+package com.icbt.service;
 
 import com.icbt.util.DBConnection;
 import org.junit.jupiter.api.Test;
