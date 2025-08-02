@@ -63,10 +63,7 @@
 
 ---
 
-## 🗒 Notes
-
-- _[List issues, bugs, or concerns]_
 
 ---
 
-### 🚀 Ready to Merge into `main`: ☐ Yes / ☐ No
+### 🚀 Ready to Merge into `main`: ✅ Yes
