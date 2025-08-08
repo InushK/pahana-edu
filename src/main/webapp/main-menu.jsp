@@ -81,7 +81,7 @@
     <a href="add-new-customer.jsp">Add New Customer</a>
     <a href="CustomerServlet">Edit Customer</a>
     <a href="ItemServlet">Manage Items</a>
-    <a href="DisplayAccount.jsp">Display Account</a>
+    <a href="display-account.jsp">Display Account</a>
     <a href="BillServlet">Print Bill</a>
     <a href="help.jsp">Help</a>
   </div>
