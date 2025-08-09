@@ -50,7 +50,7 @@ public class CustomerDAO {
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
             stmt.setInt(1, accountNumber);
-
+            return stmt.executeUpdate() >0;
         } catch (Exception e) {
             e.printStackTrace();
         }
