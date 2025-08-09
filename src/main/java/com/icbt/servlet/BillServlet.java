@@ -147,7 +147,17 @@ System.out.println(request.getParameter("customer_id"));
                         item.setBillId(billId);
                     }
                     billItemService.saveBillItems(billItems);
-                    response.sendRedirect("BillServlet");
+                    Bill newBill = billService.getBillById(billId); // fetch the inserted bill
+                    List<BillItem> newBillItems = billItemService.getBillItemsByBillId(billId);
+                    Customer customer = customerService.getCustomerById(bill.getAccountNumber());
+                    List<Item> items = itemService.getAllItems();
+
+                    request.setAttribute("bill", newBill);
+                    request.setAttribute("billItems", newBillItems);
+                    request.setAttribute("customer", customer);
+                    request.setAttribute("items", items);
+
+                    request.getRequestDispatcher("bill-summary.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("error.jsp");
                 }

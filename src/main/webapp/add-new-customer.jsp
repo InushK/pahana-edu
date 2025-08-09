@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 7/19/2025
-  Time: 7:49 PM
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -68,15 +60,26 @@
       background-color: #0056b3;
     }
 
-    .back-link {
-      display: block;
-      text-align: center;
+    .back-links {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
       margin-top: 20px;
+    }
+
+    .back-link {
+      flex: 1;
+      text-align: center;
       color: #007bff;
       text-decoration: none;
+      padding: 10px;
+      background-color: #f0f8ff;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
     }
 
     .back-link:hover {
+      background-color: #d0e8ff;
       text-decoration: underline;
     }
   </style>
@@ -98,7 +101,10 @@
     <input type="submit" value="Register Customer">
   </form>
 
-  <a href="show-customer.jsp" class="back-link">← Back to Customer List</a>
+  <div class="back-links">
+    <a href="show-customer.jsp" class="back-link">← Back to Customer List</a>
+    <a href="main-menu.jsp" class="back-link">← Back to Home</a>
+  </div>
 </div>
 
 </body>
