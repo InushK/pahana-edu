@@ -53,7 +53,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
         input[type="submit"] {
             width: 100%;
             padding: 10px;
@@ -68,19 +67,16 @@
         input[type="submit"]:hover {
             background-color: #3e8e41;
         }
-
         .error {
             color: red;
             text-align: center;
             margin-bottom: 15px;
         }
-
         .success {
             color: blue;
             text-align: center;
             margin-bottom: 15px;
         }
-
         .help-link {
             margin-top: 10px;
             display: inline-block;
@@ -139,6 +135,7 @@
 
 <div class="footer">
     &copy; 2025 Pahana Edu Bookshop System
+
 </div>
 
 </body>

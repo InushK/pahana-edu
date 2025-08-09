@@ -73,7 +73,6 @@
     .actions form {
       display: inline;
     }
-
     .back-home {
       display: block;
       text-align: center;
