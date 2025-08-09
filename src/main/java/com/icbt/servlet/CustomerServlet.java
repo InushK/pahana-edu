@@ -41,6 +41,7 @@ public class CustomerServlet extends HttpServlet {
 
         try {
 
+
             if (accountNumberStr == null || accountNumberStr.isEmpty()) {
                 // ADD mode
                 success = customerService.registerCustomer(customer);

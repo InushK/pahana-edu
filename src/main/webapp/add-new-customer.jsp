@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -81,7 +80,6 @@
 
     .back-link:hover {
       background-color: #d0e8ff;
-
       text-decoration: underline;
     }
   </style>
@@ -102,7 +100,6 @@
 
     <input type="submit" value="Register Customer">
   </form>
-
   <div class="back-links">
     <a href="show-customer.jsp" class="back-link">← Back to Customer List</a>
     <a href="main-menu.jsp" class="back-link">← Back to Home</a>

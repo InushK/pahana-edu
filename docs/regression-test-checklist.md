@@ -55,7 +55,6 @@
 
 ## 🧼 Release Readiness
 
-
 | Task                                         | Status |
 |----------------------------------------------|-----|
 | `pom.xml` version is `1.0.0`                 | ✅ Confirmed |

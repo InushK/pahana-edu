@@ -159,6 +159,7 @@ System.out.println(request.getParameter("customer_id"));
 
                     request.getRequestDispatcher("bill-summary.jsp").forward(request, response);
 
+
                 } else {
                     response.sendRedirect("error.jsp");
                 }

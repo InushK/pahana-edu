@@ -21,6 +21,7 @@ public class CustomerDAO {
 
             return stmt.executeUpdate() > 0;
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }

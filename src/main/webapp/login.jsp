@@ -36,8 +36,6 @@
             margin-bottom: 20px;
             color: #333;
         }
-
-
         label {
             display: block;
             margin-bottom: 6px;
@@ -64,7 +62,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         input[type="submit"]:hover {
             background-color: #3e8e41;
         }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ page session="true" %>
 <%@ page import="com.icbt.model.User" %>
+
 <%
   User user = (User) session.getAttribute("user");
   if (user == null) {
@@ -69,6 +70,7 @@
     .logout-button {
       background-color: #e74c3c;
       margin-top: 10px;
+
     }
   </style>
 </head>
