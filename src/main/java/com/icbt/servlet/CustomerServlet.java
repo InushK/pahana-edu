@@ -1,5 +1,4 @@
 package com.icbt.servlet;
-
 import com.icbt.model.Customer;
 import com.icbt.service.CustomerService;
 import jakarta.servlet.ServletException;
@@ -41,6 +40,7 @@ public class CustomerServlet extends HttpServlet {
         boolean success;
 
         try {
+
             if (accountNumberStr == null || accountNumberStr.isEmpty()) {
                 // ADD mode
                 success = customerService.registerCustomer(customer);
@@ -100,3 +100,4 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 }
+

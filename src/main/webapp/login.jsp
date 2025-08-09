@@ -37,6 +37,7 @@
             color: #333;
         }
 
+
         label {
             display: block;
             margin-bottom: 6px;
@@ -95,6 +96,7 @@
             color: #666;
             text-align: center;
         }
+
     </style>
 </head>
 <body>

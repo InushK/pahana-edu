@@ -87,6 +87,7 @@
   </div>
 
   <a class="logout-button" href="LogoutServlet" onclick="return confirm('Are you sure you want to logout?')">Logout</a>
+
 </div>
 
 </body>

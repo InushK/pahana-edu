@@ -20,6 +20,7 @@ public class CustomerDAO {
             stmt.setString(3, customer.getTelephone());
 
             return stmt.executeUpdate() > 0;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,7 +49,7 @@ public class CustomerDAO {
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
             stmt.setInt(1, accountNumber);
-            return stmt.executeUpdate() > 0;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,6 +71,7 @@ public class CustomerDAO {
                 customer.setAddress(rs.getString("address"));
                 customer.setTelephone(rs.getString("telephone"));
                 customers.add(customer);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,3 +102,4 @@ public class CustomerDAO {
         return null;
     }
 }
+
