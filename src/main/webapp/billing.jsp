@@ -78,6 +78,26 @@
             text-align: center;
             margin-bottom: 20px;
         }
+
+        .back-home {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-home a {
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-home a:hover {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -126,6 +146,10 @@
     </tr>
     <% } %>
 </table>
+
+<div class="back-home">
+    <a href="main-menu.jsp">← Back to Home</a>
+</div>
 
 </body>
 </html>
